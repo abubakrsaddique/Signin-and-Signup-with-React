@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import UserAuthContextProvider from './context/UserAuthContext';
+import Signin from './Components/Signin'; 
+import Home from './Components/Home';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
 
-function App() {
+const history = createBrowserHistory();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserAuthContextProvider>
+      <Router history={history}>
+        <Routes>
+         
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </UserAuthContextProvider>
   );
-}
+};
 
 export default App;
